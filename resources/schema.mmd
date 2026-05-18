@@ -1,0 +1,56 @@
+erDiagram
+    User {
+        int id PK
+        string name
+        string email
+        string password
+        string role
+        bool is_active
+        bool is_staff
+        datetime created_at
+        datetime updated_at
+    }
+
+    Question {
+        int id PK
+        string text
+        string difficult_level
+    }
+
+    Answer {
+        int id PK
+        int question_id FK
+        string text
+        bool is_correct
+    }
+
+    Trivia {
+        int id PK
+        int created_by_id FK
+        string name
+        string description
+    }
+
+    TriviaParticipant {
+        int id PK
+        int trivia_id FK
+        int user_id FK
+        int score
+        bool completed
+    }
+
+    TriviaAnswer {
+        int id PK
+        int participant_id FK
+        int question_id FK
+        int selected_option_id FK
+    }
+
+    Question ||--o{ Answer : "has"
+    Trivia }o--o{ Question : "contains"
+    Trivia ||--o{ TriviaParticipant : "has"
+    User ||--o{ TriviaParticipant : "participates"
+    User ||--o{ Trivia : "created_by"
+    TriviaParticipant ||--o{ TriviaAnswer : "has"
+    Question ||--o{ TriviaAnswer : "references"
+    Answer ||--o{ TriviaAnswer : "selected_option"
