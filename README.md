@@ -2,6 +2,26 @@
 
 API REST para gestionar un juego de trivia sobre temas de recursos humanos. Permite crear usuarios, preguntas y trivias, gestionar participaciones y generar rankings.
 
+## Supuestos de diseño
+
+El enunciado deja varios puntos abiertos intencionalmente. Estas son las decisiones tomadas:
+
+1. El registro de usuarios, crea usuarios con rol `player` de forma predeterminada.
+2. Los admins solo pueden ser creados por otro admin.
+3. El email es el identificador único de autenticación .
+4. Solo los admins pueden crear, editar y eliminar preguntas y respuestas.
+5. Solo los admins pueden crear, eliminar y editar trivias.
+6. Un admin puede editar cualquier usuario; un usuario solo puede editarse a sí mismo.
+7. Las preguntas son reutilizables: pueden asignarse a múltiples trivias simultáneamente.
+8. Un jugador solo puede responder una trivia una vez; una vez completada, no puede volver a enviar respuestas.
+9. Todas las respuestas se envían en una única llamada; no se puede guardar progreso parcial.
+10. El ranking muestra a todos los participantes de la trivia, incluso los que aún no la han completado.
+11. Al actualizar una trivia, los `question_ids` reemplazan el conjunto completo de preguntas, mientras que los `user_ids` solo agregan participantes nuevos sin eliminar los existentes.
+12. No hay límite de tiempo para completar una trivia.
+13. Solo los players pueden responder una trivia.
+
+---
+
 ## Tecnologías
 
 - Python 3.11
